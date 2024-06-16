@@ -80,3 +80,33 @@ void Dijkstra(int u)
 		}
 	}
 }
+//--------BELLMAN FORD---------
+int n, s, a[100][100], d[100], e[100];
+int BellmanFord(int s)
+{
+	for(int i = 1; i <= n; i++)
+	{
+		d[i] = a[s][i];
+		e[i] = s;
+	}
+	d[s] = 0; e[s] = 0; 
+	int ok = 0;
+	for(int k = 1; k <= n - 1; k++)
+	{
+		int ok = 1;
+		for(int v = 1; v <= n; v++)
+		{
+			for(int u = 1; u <= n; u++)
+			{
+				if(d[v] > d[u] + a[u][v])
+				{
+					d[v] = d[u] + a[u][v];
+					e[v] = u;
+					ok = 0;
+				}
+			}
+		}
+		if(ok == 1) return 1;
+	}
+	return 0;
+}
